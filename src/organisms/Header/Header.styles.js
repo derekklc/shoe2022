@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const ContentContainer = styled.div`
   width: 100%;
   background: transparent;
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
   padding-top: 15px;

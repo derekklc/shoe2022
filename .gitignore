@@ -60,6 +60,7 @@ cucumber*.html
 
 slack_message.txt
 /html
+/build
 /.docz
 
 __pycache__
