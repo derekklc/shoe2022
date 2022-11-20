@@ -12,7 +12,7 @@ export const GalleryGrid = styled.div`
   padding-inline: 56px;
   margin-top: 80px;
   margin-bottom: 40px;
-  margin-right: 120px;
+  margin-right: 60px;
 `;
 
 export const GalleryItem = styled.div`
