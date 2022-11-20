@@ -1,0 +1,15 @@
+//Install git on EC2
+sudo yum update -y
+sudo yum install git -y
+
+//nginx
+https://linuxize.com/post/start-stop-restart-nginx/
+    systemctl start nginx
+    systemctl restart nginx
+
+default nginx template host files location:
+    /usr/share/nginx/html
+
+
+//Install package
+npm install @emotion/styled --save
