@@ -1,0 +1,11 @@
+#flyme {
+    position: fixed;
+    width: 25px;
+    height: 25px;
+    display: none;
+}
+
+#flyme img {
+    height: 100%;
+    width: 100%;
+}

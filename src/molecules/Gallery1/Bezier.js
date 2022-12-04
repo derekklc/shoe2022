@@ -1,11 +1,5 @@
 export const BezierCoords = (time, BezierPoints) => {
   //   refrence = "https://www.desmos.com/calculator/ebdtbxgbq0";
-  //   const samplePoints = {
-  //     start: { x: 1.6, y: 1.37 },
-  //     startDir: { x: 1.58, y: 8.4 },
-  //     finish: { x: 5.12, y: 4.89 },
-  //     finishDir: { x: 7.06, y: 6.44 },
-  //   };
   const samplePoints = {
     start: { x: 0, y: 0 },
     startDir: { x: 0, y: 20 },
@@ -33,9 +27,18 @@ export const BezierCoords = (time, BezierPoints) => {
   };
 };
 
-export const FlyMe = (leaf) => {
-  if (!leaf || !leaf[0]) {
+export const FlyMe = (leaf, startPosition, finishPosition) => {
+  //   console.log("startPosition: ", startPosition);
+  console.log("finishPosition: ", finishPosition);
+  if (!leaf || !leaf[0] || !startPosition) {
     return;
+  }
+  if (leaf.is(":hidden")) {
+    leaf.css({
+      left: `${startPosition.x}px`,
+      top: `${startPosition.y}px`,
+      display: "block",
+    });
   }
   window.requestAnimationFrame =
     window.requestAnimationFrame ||
@@ -43,18 +46,10 @@ export const FlyMe = (leaf) => {
     window.webkitRequestAnimationFrame ||
     window.msRequestAnimationFrame;
 
-  // var field = document.getElementById("field");
-  var ball = leaf[0];
-
-  // var maxX = field.clientWidth - ball.offsetWidth;
-  // var maxY = field.clientHeight - ball.offsetHeight;
-
-  let maxX = 200;
-
-  var duration = 0.3; // seconds
+  var duration = 0.5; // seconds
   var gridSize = {
-    x: 10,
-    y: 4,
+    x: 1,
+    y: 1,
   }; // pixels
   var start = null;
 
@@ -64,15 +59,26 @@ export const FlyMe = (leaf) => {
 
     progress = (timestamp - start) / duration / 1000; // percent
 
-    // let x = (progress * maxX) / gridSize.x; // x = ƒ(t)
-    // let y = 2 * Math.sin(x); // y = ƒ(x)
-    let { x, y } = BezierCoords(progress);
-    // x = x / gridSize.x;
-    // y = y / gridSize.y;
+    let BezierPoints;
+    let xDiff, yDiff;
+    if (finishPosition) {
+      xDiff = finishPosition.x - startPosition.x;
+      yDiff = startPosition.y - finishPosition.y;
+      //   console.log("xDiff: ", xDiff);
+      BezierPoints = {
+        start: { x: 0, y: 0 },
+        startDir: { x: 0, y: 20 },
+        finish: {
+          x: xDiff,
+          y: yDiff,
+        },
+        finishDir: { x: yDiff, y: yDiff < 3 ? yDiff : yDiff - 3 },
+      };
+    }
 
-    // ball.style.left = Math.min(maxX, gridSize.x * x) + "px";
-    // ball.style.bottom = maxY / 2 + gridSize.y * y + "px";
-    const leftOffset = Math.min(maxX, gridSize.x * x);
+    let { x, y } = BezierCoords(progress, BezierPoints);
+
+    const leftOffset = gridSize.x * x;
     const bottomOffset = gridSize.y * y;
     leaf.css({
       transform: `translate(${leftOffset}px, ${-bottomOffset}px)`,
@@ -81,6 +87,8 @@ export const FlyMe = (leaf) => {
     // if(progress >= 1) start = null; // reset to start position
     if (progress <= 0.98) {
       requestAnimationFrame(step);
+    } else {
+      //   leaf.hide();
     }
   }
 

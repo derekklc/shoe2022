@@ -35,7 +35,7 @@ const Header = ({ updateGreetings }) => {
         <Logo />
       </S.HeaderLogo>
       <S.HeaderMore>
-        <S.BurgerContainer onClick={clickHandler}>
+        <S.BurgerContainer onClick={clickHandler} id="header-burger">
           <Burger />
         </S.BurgerContainer>
       </S.HeaderMore>
