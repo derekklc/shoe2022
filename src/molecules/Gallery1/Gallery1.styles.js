@@ -19,6 +19,7 @@ export const GalleryItem = styled.div`
   display: flex;
   flex-direction: column;
   transition: transform 0.3s;
+  position: relative;
   :hover {
     transform: scale(1.03);
     .gallery1-img-container {
@@ -26,6 +27,9 @@ export const GalleryItem = styled.div`
     }
     .gallery1-item-background {
       height: 100%;
+    }
+    .gallery1-item-add-button {
+      display: block;
     }
   }
 `;
@@ -38,6 +42,7 @@ export const ItemImgContainer = styled.div`
   opacity: 0.8;
   cursor: pointer;
   border-radius: 2px;
+  transition: transform 0.3s;
   img {
     height: 100%;
     width: 100%;
@@ -53,6 +58,7 @@ export const ItemDscp = styled.div`
   padding-bottom: 14px;
   row-gap: 14px;
   border-radius: 0 0 3px 3px;
+  transition: transform 0.3s;
 `;
 
 export const ItemTitle = styled.div`
@@ -84,3 +90,44 @@ export const ItemBg = styled.div`
   opacity: 0.3;
   transition: 0.3s;
 `;
+
+export const AddButton = styled.div`
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  cursor: pointer;
+  position: absolute;
+  display: none;
+  right: 0;
+  top: 0;
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+`;
+
+export const FlyImg = styled.div`
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  background: white;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  border: 3px solid red;
+  transition: opacity 0.3s;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+`;
+
+// export const FlyMe = styled.div`
+//   position: fixed;
+//   min-width: 40px;
+//   height: 40px;
+//   background: white;
+//   color: black;
+//   border-radius: 3px;
+//   padding: 3px 14px;
+// `;

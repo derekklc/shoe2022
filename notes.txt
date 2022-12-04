@@ -13,3 +13,6 @@ default nginx template host files location:
 
 //Install package
 npm install @emotion/styled --save
+
+
+//S3 endpoint: http://staticsite1derek.s3-website-ap-southeast-2.amazonaws.com
